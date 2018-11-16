@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "todo-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/todo/TodoWebPart.js",
+          "manifest": "./src/webparts/todo/TodoWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "TodoWebPartStrings": "lib/webparts/todo/loc/{locale}.js"
+  }
+}
