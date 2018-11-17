@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-    <Field ID="{6b64dff9-536a-4652-9892-d88bd341cd18}"
-            Name="SPFxPercentage"
-            DisplayName="Percentage"
-            Type="Number"
-            Min="0"
-            Required="FALSE"
-            Group="SPFx Columns"
-            ClientSideComponentId="fa9d32ac-6eaa-475b-8f77-8e50cd584223">
+    <Field
+        ID="{6b64dff9-536a-4652-9892-d88bd341cd18}"
+        Name="SPFxCompleted"
+        DisplayName="Completed"
+        Type="Calculated"
+        ResultType="Boolean"
+        ReadOnly="TRUE"
+        Group="SPFx Columns"
+        ClientSideComponentId="fa9d32ac-6eaa-475b-8f77-8e50cd584223"
+    >
+        <Formula>=Completed</Formula>
+        <FieldRefs>
+            <FieldRef Name="Completed"/>
+        </FieldRefs>
     </Field>
 </Elements>

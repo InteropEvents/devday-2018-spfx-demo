@@ -1,53 +1,27 @@
-import { Log } from '@microsoft/sp-core-library';
 import { override } from '@microsoft/decorators';
 import {
   BaseFieldCustomizer,
   IFieldCustomizerCellEventParameters
 } from '@microsoft/sp-listview-extensibility';
 
-import * as strings from 'TodoListFieldCustomizerStrings';
-import styles from './TodoListFieldCustomizer.module.scss';
+const DAYS: number = 24 * 60 * 60 * 1000;
 
-/**
- * If your field customizer uses the ClientSideComponentProperties JSON input,
- * it will be deserialized into the BaseExtension.properties object.
- * You can define an interface to describe it.
- */
-export interface ITodoListFieldCustomizerProperties {
-  // This is an example; replace with your own property
-  sampleText?: string;
-}
-
-const LOG_SOURCE: string = 'TodoListFieldCustomizer';
-
-export default class TodoListFieldCustomizer
-  extends BaseFieldCustomizer<ITodoListFieldCustomizerProperties> {
-
-  @override
-  public onInit(): Promise<void> {
-    // Add your custom initialization to this method.  The framework will wait
-    // for the returned promise to resolve before firing any BaseFieldCustomizer events.
-    Log.info(LOG_SOURCE, 'Activated TodoListFieldCustomizer with properties:');
-    Log.info(LOG_SOURCE, JSON.stringify(this.properties, undefined, 2));
-    Log.info(LOG_SOURCE, `The following string should be equal: "TodoListFieldCustomizer" and "${strings.Title}"`);
-    return Promise.resolve();
-  }
-
+export default class TodoListFieldCustomizer extends BaseFieldCustomizer<{}> {
   @override
   public onRenderCell(event: IFieldCustomizerCellEventParameters): void {
-    // Use this method to perform your custom cell rendering.
-    const text: string = `${this.properties.sampleText}: ${event.fieldValue}`;
+    const completed: boolean = event.fieldValue === 'Yes';
+    const createdDate: Date = new Date(event.listItem.getValueByName('CreatedDate'));
+    const completedDate: null | Date = event.listItem.getValueByName('CompletedDate') ? new Date(event.listItem.getValueByName('CompletedDate')) : null;
+    console.log(createdDate, completedDate);
 
-    event.domElement.innerText = text;
-
-    event.domElement.classList.add(styles.cell);
-  }
-
-  @override
-  public onDisposeCell(event: IFieldCustomizerCellEventParameters): void {
-    // This method should be used to free any resources that were allocated during rendering.
-    // For example, if your onRenderCell() called ReactDOM.render(), then you should
-    // call ReactDOM.unmountComponentAtNode() here.
-    super.onDisposeCell(event);
+    event.domElement.textContent = completed ? '\u2713' : '\u2717';
+    if (event.domElement.parentElement && event.domElement.parentElement.parentElement) {
+      const rowElement: HTMLElement = event.domElement.parentElement.parentElement;
+      if (completed) {
+        rowElement.style.backgroundColor = '#bdbdbd';
+      } else if (Date.now() - createdDate.getTime() > 7 * DAYS) {
+        rowElement.style.backgroundColor = '#fbaa85';
+      }
+    }
   }
 }

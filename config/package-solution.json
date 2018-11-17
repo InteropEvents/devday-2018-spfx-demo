@@ -3,7 +3,7 @@
   "solution": {
     "name": "devday-demo-client-side-solution",
     "id": "128b46bf-e55e-4087-b469-f0e5c453b2f7",
-    "version": "1.0.0.0",
+    "version": "1.0.6.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false,
     "features": [
@@ -11,7 +11,7 @@
         "title": "Application Extension - Deployment of custom action.",
         "description": "Deploys a custom action with ClientSideComponentId association",
         "id": "ae79fc3d-010b-4dd2-8e8d-3984d062c9bf",
-        "version": "1.0.0.0",
+        "version": "1.0.6.0",
         "assets": {
           "elementManifests": [
             "elements.xml"
