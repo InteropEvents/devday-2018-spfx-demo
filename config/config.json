@@ -17,11 +17,20 @@
           "manifest": "./src/extensions/todoList/TodoListFieldCustomizer.manifest.json"
         }
       ]
+    },
+    "todo-command-set": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/todo/TodoCommandSet.js",
+          "manifest": "./src/extensions/todo/TodoCommandSet.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "TodoWebPartStrings": "lib/webparts/todo/loc/{locale}.js",
-    "TodoListFieldCustomizerStrings": "lib/extensions/todoList/loc/{locale}.js"
+    "TodoListFieldCustomizerStrings": "lib/extensions/todoList/loc/{locale}.js",
+    "TodoCommandSetStrings": "lib/extensions/todo/loc/{locale}.js"
   }
 }

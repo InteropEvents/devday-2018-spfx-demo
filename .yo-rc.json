@@ -8,6 +8,6 @@
     "packageManager": "npm",
     "isDomainIsolated": false,
     "componentType": "extension",
-    "extensionType": "FieldCustomizer"
+    "extensionType": "ListViewCommandSet"
   }
 }

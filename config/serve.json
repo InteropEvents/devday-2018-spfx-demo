@@ -10,11 +10,12 @@
   "serveConfigurations": {
     "default": {
       "pageUrl": "https://m365x466773.sharepoint.com/sites/MyTeam-2/Lists/Todo/AllItems.aspx",
-      "fieldCustomizers": {
-        "Completed": {
-          "id": "fa9d32ac-6eaa-475b-8f77-8e50cd584223",
+      "customActions": {
+        "95963bde-f7ad-4207-b74f-3cb0b2dab926": {
+          "location": "ClientSideExtension.ListViewCommandSet.CommandBar",
           "properties": {
-            "sampleText": "Value"
+            "sampleTextOne": "One item is selected in the list",
+            "sampleTextTwo": "This command is always visible."
           }
         }
       }
