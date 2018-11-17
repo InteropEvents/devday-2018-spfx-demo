@@ -1,36 +1,19 @@
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  BaseClientSideWebPart,
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
-import { escape } from '@microsoft/sp-lodash-subset';
+import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 
-import styles from './TodoWebPart.module.scss';
-import * as strings from 'TodoWebPartStrings';
+import { TodoList } from './todoList';
 
-export interface ITodoWebPartProps {
-  description: string;
-}
-
-export default class TodoWebPart extends BaseClientSideWebPart<ITodoWebPartProps> {
-
+export default class TodoWebPart extends BaseClientSideWebPart<{}> {
   public render(): void {
-    this.domElement.innerHTML = `
-      <div class="${ styles.todo }">
-        <div class="${ styles.container }">
-          <div class="${ styles.row }">
-            <div class="${ styles.column }">
-              <span class="${ styles.title }">Welcome to SharePoint!</span>
-              <p class="${ styles.subTitle }">Customize SharePoint experiences using Web Parts.</p>
-              <p class="${ styles.description }">${escape(this.properties.description)}</p>
-              <a href="https://aka.ms/spfx" class="${ styles.button }">
-                <span class="${ styles.label }">Learn more</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>`;
+    const element: JSX.Element = React.createElement(TodoList, { serviceScope: this.context.serviceScope });
+
+    ReactDOM.render(element, this.domElement);
+  }
+
+  protected onDispose(): void {
+    ReactDOM.unmountComponentAtNode(this.domElement);
   }
 
   protected get dataVersion(): Version {
@@ -39,23 +22,7 @@ export default class TodoWebPart extends BaseClientSideWebPart<ITodoWebPartProps
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
-      pages: [
-        {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
-          groups: [
-            {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
+      pages: []
     };
   }
 }

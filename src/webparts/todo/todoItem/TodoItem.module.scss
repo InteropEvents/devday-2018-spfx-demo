@@ -1,0 +1,65 @@
+.todoItem {
+  // Item layout and CSS reset
+  & {
+    display: flex;
+  }
+
+  > * + * {
+    margin-left: 10px;
+  }
+
+  > .content {
+    flex-grow: 1;
+  }
+
+  p {
+    margin: 0;
+  }
+
+
+  // Border colors
+
+  & {
+    border-color: #c8c8c8;
+  }
+
+  &.active {
+    border-color: #ff7f1e;
+  }
+
+
+  // Item elements
+
+  .userPhoto {
+    $size: 50px;
+    width: $size;
+    height: $size;
+  }
+
+  .title {
+    margin-bottom: 4px;
+    font-size: 16px;
+  }
+
+  .createdBy {
+    font-size: 12px;
+    color: #a6a6a6;
+  }
+
+  .button {
+    display: none;
+    margin: 5px;
+    border: 1px solid #b9b9f3;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  &:hover .button {
+    display: inline;
+  }
+
+  .button:hover {
+    background-color: #afaff7;
+    transition: background-color 1s;
+  }
+}
