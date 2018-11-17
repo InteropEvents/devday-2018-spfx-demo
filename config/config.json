@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/todo/TodoWebPart.manifest.json"
         }
       ]
+    },
+    "todo-list-field-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/todoList/TodoListFieldCustomizer.js",
+          "manifest": "./src/extensions/todoList/TodoListFieldCustomizer.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "TodoWebPartStrings": "lib/webparts/todo/loc/{locale}.js"
+    "TodoWebPartStrings": "lib/webparts/todo/loc/{locale}.js",
+    "TodoListFieldCustomizerStrings": "lib/extensions/todoList/loc/{locale}.js"
   }
 }

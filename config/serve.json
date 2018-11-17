@@ -6,5 +6,18 @@
   "api": {
     "port": 5432,
     "entryPath": "node_modules/@microsoft/sp-webpart-workbench/lib/api/"
+  },
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://m365x466773.sharepoint.com/sites/MyTeam-2/Lists/Todo/AllItems.aspx",
+      "fieldCustomizers": {
+        "Completed": {
+          "id": "fa9d32ac-6eaa-475b-8f77-8e50cd584223",
+          "properties": {
+            "sampleText": "Value"
+          }
+        }
+      }
+    }
   }
 }
