@@ -1,5 +1,4 @@
 import { override } from '@microsoft/decorators';
-import { Log } from '@microsoft/sp-core-library';
 import {
   BaseListViewCommandSet,
   Command,
@@ -7,47 +6,35 @@ import {
   IListViewCommandSetExecuteEventParameters
 } from '@microsoft/sp-listview-extensibility';
 import { Dialog } from '@microsoft/sp-dialog';
+import { updateTodoItem } from '../../webparts/todo/api';
 
-import * as strings from 'TodoCommandSetStrings';
-
-/**
- * If your command set uses the ClientSideComponentProperties JSON input,
- * it will be deserialized into the BaseExtension.properties object.
- * You can define an interface to describe it.
- */
-export interface ITodoCommandSetProperties {
-  // This is an example; replace with your own properties
-  sampleTextOne: string;
-  sampleTextTwo: string;
-}
-
-const LOG_SOURCE: string = 'TodoCommandSet';
-
-export default class TodoCommandSet extends BaseListViewCommandSet<ITodoCommandSetProperties> {
-
-  @override
-  public onInit(): Promise<void> {
-    Log.info(LOG_SOURCE, 'Initialized TodoCommandSet');
-    return Promise.resolve();
-  }
+export default class TodoCommandSet extends BaseListViewCommandSet<{}> {
 
   @override
   public onListViewUpdated(event: IListViewCommandSetListViewUpdatedParameters): void {
-    const compareOneCommand: Command = this.tryGetCommand('COMMAND_1');
-    if (compareOneCommand) {
-      // This command should be hidden unless exactly one row is selected.
-      compareOneCommand.visible = event.selectedRows.length === 1;
+    const command: Command = this.tryGetCommand('COMPLETE_TODO_ITEM_COMMAND');
+    if (command) {
+      command.visible = (
+        event.selectedRows.length === 1 &&
+        event.selectedRows[0].getValueByName('Completed') === 'No'
+      );
     }
   }
 
   @override
   public onExecute(event: IListViewCommandSetExecuteEventParameters): void {
     switch (event.itemId) {
-      case 'COMMAND_1':
-        Dialog.alert(`${this.properties.sampleTextOne}`);
-        break;
-      case 'COMMAND_2':
-        Dialog.alert(`${this.properties.sampleTextTwo}`);
+      case 'COMPLETE_TODO_ITEM_COMMAND':
+        const todoItemId: number = Number(event.selectedRows[0].getValueByName('ID'));
+        const title: number = event.selectedRows[0].getValueByName('Title');
+
+        Dialog.alert(`Completing the todo item: ${title}`);
+        updateTodoItem(this.context.serviceScope, todoItemId, /* completed */ true)
+          .then(() => {
+            // There is no way to refresh the list view yet. Refresh the page as a workaround.
+            // See https://github.com/SharePoint/sp-dev-docs/issues/1449
+            window.location.reload();
+          });
         break;
       default:
         throw new Error('Unknown command');

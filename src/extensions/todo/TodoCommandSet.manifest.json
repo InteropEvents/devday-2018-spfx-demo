@@ -16,14 +16,9 @@
   "requiresCustomScript": false,
 
   "items": {
-    "COMMAND_1": {
-      "title": { "default": "Command One" },
-      "iconImageUrl": "icons/request.png",
-      "type": "command"
-    },
-    "COMMAND_2": {
-      "title": { "default": "Command Two" },
-      "iconImageUrl": "icons/cancel.png",
+    "COMPLETE_TODO_ITEM_COMMAND": {
+      "title": { "default": "Complete To-do Item" },
+      "iconImageUrl": "https://tse2.mm.bing.net/th?id=OIP.rXoaPiUgFR7hyan4Xni5fAHaHa&pid=Api",
       "type": "command"
     }
   }

@@ -15,4 +15,12 @@
             <FieldRef Name="Completed"/>
         </FieldRefs>
     </Field>
+    <CustomAction
+        Title="TodoCommandSet"
+        RegistrationId="100"
+        RegistrationType="List"
+        Location="ClientSideExtension.ListViewCommandSet"
+        ClientSideComponentId="95963bde-f7ad-4207-b74f-3cb0b2dab926"
+        ClientSideComponentProperties="{}">
+    </CustomAction>
 </Elements>
